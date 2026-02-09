@@ -2,10 +2,11 @@
   "name": "twitch-chat-bot",
   "type": "module",
   "scripts": {
+    "build": "npm run build:es",
     "dev": "tsx watch src/index.ts",
     "build:es": "node build.cjs",
-    "start": "node --env-file=.env dist/index.js",
-    "package": "npm run build:es && pkg dist/bundle.js --targets node18-win-x64 --output dist/TwitchBot.exe"
+    "start": "node dist/index.js",
+    "package": "npm run build:es && pkg dist/index.js --targets node18-win-x64 --output dist/TwitchBot.exe"
   },
   "bin": "dist/index.js",
   "dependencies": {
@@ -23,13 +24,14 @@
     "typescript": "^5.6.2"
   },
   "pkg": {
+    "assets": [
+      "dist/workers/**/*.js",
+      "node_modules/tmi.js/**/*",
+      "node_modules/readline-sync/**/*"
+    ],
     "targets": [
       "node18-win-x64"
     ],
-    "outputPath": "dist",
-    "output": "TwitchBot",
-    "options": {
-      "no-bytecode": true
-    }
+    "outputPath": "dist"
   }
 }
