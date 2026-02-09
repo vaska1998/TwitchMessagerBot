@@ -1,5 +1,5 @@
 {
-  "name": "twitch-chat-bot",
+  "name": "twitch-messager",
   "version": "1.0.0",
   "scripts": {
     "build": "node build.cjs",
