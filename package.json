@@ -5,7 +5,8 @@
     "build": "node build.cjs",
     "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js",
-    "package": "npm run build && pkg . --compress Brotli"
+    "package:windows": "npm run build && pkg . --targets node18-win-x64 --compress Brotli",
+    "package:android": "npm run build && pkg . --targets node18-linux-arm64 --no-bytecode --public"
   },
   "bin": "dist/index.js",
   "dependencies": {
