@@ -1,13 +1,9 @@
 import dotenv from "dotenv";
 import readlineSync from "readline-sync";
-import { TelegramBot } from "./clients/bot.js";
+import { TelegramBot } from "./clients/bot";
 import { Worker } from "worker_threads";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -53,15 +49,7 @@ interface WorkerMessage {
 }
 
 function createWorkerForChannel(channel: string) {
-    // ✅ ВИПРАВЛЕНО: правильний шлях до воркера
     const workerPath = path.join(__dirname, 'workers', 'twitch-worker.js');
-
-    // Перевірка існування файлу
-    if (!fs.existsSync(workerPath)) {
-        console.error(`❌ Файл воркера не знайдено: ${workerPath}`);
-        console.error(`   Поточна директорія: ${__dirname}`);
-        return;
-    }
 
     const worker = new Worker(workerPath, {
         workerData: { channel, username }
@@ -84,11 +72,11 @@ function createWorkerForChannel(channel: string) {
                 break;
 
             case 'error':
-                console.error(`❌ Помилка [${msg.channel}]:`, msg.error);
+                console.error(`❌ Помилка [${msg.channel}]: ${msg.error}`);
                 break;
 
             case 'info':
-                console.log(`ℹ️  [${msg.channel}]: ${msg.message}`);
+                console.log(`💬 [${msg.channel}] ${msg.message}`);
                 break;
         }
     });
@@ -118,12 +106,10 @@ function restartWorker(channel: string) {
 }
 
 console.log(`\n🚀 Запускаю ${channels.length} воркерів...`);
-console.log(`📁 Робоча директорія: ${__dirname}\n`);
 
 channels.forEach(createWorkerForChannel);
 
-console.log(`👤 Шукаю mentions для: ${username}`);
-console.log(`💬 Відправка в Telegram chat: ${chatId}\n`);
+console.log(`👤 Шукаю mentions для: ${username}\n`);
 
 process.on('SIGINT', async () => {
     console.log('\n\n👋 Вимикаю бота...');

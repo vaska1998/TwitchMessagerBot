@@ -1,12 +1,11 @@
 {
   "name": "twitch-chat-bot",
-  "type": "module",
+  "version": "1.0.0",
   "scripts": {
-    "build": "npm run build:es",
+    "build": "node build.cjs",
     "dev": "tsx watch src/index.ts",
-    "build:es": "node build.cjs",
     "start": "node dist/index.js",
-    "package": "npm run build:es && pkg dist/index.js --targets node18-win-x64 --output dist/TwitchBot.exe"
+    "package": "npm run build && pkg . --compress Brotli"
   },
   "bin": "dist/index.js",
   "dependencies": {
@@ -24,14 +23,12 @@
     "typescript": "^5.6.2"
   },
   "pkg": {
-    "assets": [
-      "dist/workers/**/*.js",
-      "node_modules/tmi.js/**/*",
-      "node_modules/readline-sync/**/*"
-    ],
     "targets": [
       "node18-win-x64"
     ],
-    "outputPath": "dist"
+    "scripts": [
+      "dist/**/*.js"
+    ],
+    "outputPath": "build"
   }
 }
