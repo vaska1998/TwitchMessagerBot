@@ -12,10 +12,10 @@ const ensureEnv = () => {
     if (!fs.existsSync(envPath)) {
         console.log("⚙️  Налаштування Twitch Bot вперше...");
 
-        const username = readlineSync.question("👉 Введи свій Twitch username: ");
-        const token = readlineSync.question("🔑 Введи свій Telegram bot token: ");
-        const channel = readlineSync.question("📺 Введи канали через кому та без пробілів: ");
-        const chatId = readlineSync.question("Введи Telegram Chat ID: ");
+        const username = readlineSync.question("Enter your Twitch username: ");
+        const token = readlineSync.question("Enter your Telegram bot token: ");
+        const channel = readlineSync.question("Enter channels (comma-separated): ");
+        const chatId = readlineSync.question("Enter Telegram Chat ID: ");
 
         const content = `USER_NICKNAME=${username}
 TELEGRAM_BOT_TOKEN=${token}
