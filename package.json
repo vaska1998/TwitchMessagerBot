@@ -1,5 +1,5 @@
 {
-  "name": "twitch-messager",
+  "name": "twitch-youtube-messager",
   "version": "1.0.0",
   "scripts": {
     "build": "node build.cjs",
@@ -12,10 +12,11 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "readline-sync": "^1.4.10",
-    "tmi.js": "^1.8.5"
+    "tmi.js": "^1.8.5",
+    "youtube-chat": "^2.2.0"
   },
   "devDependencies": {
-    "@types/node": "^24.7.2",
+    "@types/node": "^24.10.12",
     "@types/readline-sync": "^1.4.8",
     "@types/tmi.js": "^1.8.6",
     "esbuild": "^0.25.10",
